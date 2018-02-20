@@ -110,6 +110,27 @@
         <a class="go-top hex-alt" href="javascript:void(0)">
             <i class="fa fa-angle-up"></i>
         </a>
+				     <!-- WhatsHelp.io widget -->
+<script type="text/javascript">
+    (function () {
+        var options = {
+            facebook: "amilson.moncao", // Facebook page ID
+            whatsapp: "+559193152455", // WhatsApp number
+            email: "amilsion@hotmail.com", // Email
+            company_logo_url: "//amilson.com/assets/images/favicons/apple-touch-icon-114x114-precomposed.png", // URL of company logo (png, jpg, gif)
+            greeting_message: "Olá, como posso ajudá-lo? Basta me enviar uma mensagem agora para obter assistência", // Text of greeting message
+            call_to_action: "Alguma Dúvida?", // Call to action
+            button_color: "#A8CE50", // Color of button
+            position: "right", // Position may be 'right' or 'left'
+            order: "facebook,whatsapp,email" // Order of buttons
+        };
+        var proto = document.location.protocol, host = "whatshelp.io", url = proto + "//static." + host;
+        var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = url + '/widget-send-button/js/init.js';
+        s.onload = function () { WhWidgetSendButton.init(host, proto, options); };
+        var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x);
+    })();
+</script>
+<!-- /WhatsHelp.io widget -->
 				    <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
