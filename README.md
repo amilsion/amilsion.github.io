@@ -2,4 +2,4 @@
 
 Blog criado para divulgação de trabalhos produzidos. 
 
-Mais informações [amilson.com](http://www.amilson.com)
+Mais informações [amilson.tk](http://www.amilson.tk)
