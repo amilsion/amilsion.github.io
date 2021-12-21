@@ -16,8 +16,12 @@
 				</header>
                 <div class="row">
                     <div class="col-md-6">
-                        <form class="contact-form" id="contactForm" novalidate="" action="">
-                            <div class="form-group form-icon-group">
+                        <form class="contact-form" id="contactForm" novalidate="" action="https://api.staticforms.xyz/submit" method="post">
+															     
+			<input type="hidden" name="accessKey" value="6190b232-287b-4a36-882f-1bf6f4a09368">
+													  
+                            
+			<div class="form-group form-icon-group">
                                 <input class="form-control" id="name" placeholder="Seu Nome *" type="text">
                                 <i class="fa fa-user"></i>
                             </div>
@@ -30,6 +34,9 @@
                                 <i class="fa fa-pencil"></i>
                             </div>
                             <div class="form-group text-center">
+							     
+				<input type="hidden" name="redirectTo" value="https://amilsion.github.io/success">
+							       
                                 <button class="btn btn-primary btn-icon btn-icon-right" type="submit">
                                     Enviar email
                                     <div class="hex-alt">
