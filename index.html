@@ -1,413 +1,664 @@
----
-layout: default
----
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amilson Monção | Projetos 3D e Plantas Baixas Profissionais</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: {
+                        primary: '#0f172a',
+                        accent: '#f59e0b',
+                        whatsapp: '#25d366',
+                        'whatsapp-dark': '#128c7e',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', sans-serif; }
 
-		<section class="section swatch-black-white" id="home">
-			<div class="background-media" style="background-image: url(''); background-repeat: ; background-size: ; background-attachment: ; background-position: ; background-size: cover;">
-				<video poster="" style="width: 100%; height: 100%;" loop autoplay  muted class="section-background-video">
-					<source type="video/mp4" src="{{ "/assets/video/Architecture.mp4" | prepend: site.baseurl }}" ></source>
-					<source type="video/webm" ></source>
-					<source type="video/ogg" ></source>
-				</video>
-			</div>
-			<div class="background-overlay" style="background-color:rgba(10,10,10,0.8)"></div>
-            <div class="container">
-                <header class="section-header text-center underline">
-                    <h1 class="headline hyper hairline">Amilson</h1>
-                    <p class="">Freelancer Profissional em 3d e Web</p>
-                </header>
+        .glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 50%, #f59e0b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .btn-whatsapp {
+            background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-whatsapp::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+        .btn-whatsapp:hover::before { left: 100%; }
+        .btn-whatsapp:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4);
+        }
+
+        .float-wa {
+            animation: pulse-wa 2s infinite;
+        }
+        @keyframes pulse-wa {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+            70% { box-shadow: 0 0 0 20px rgba(37, 211, 102, 0); }
+        }
+
+        .card-hover {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+        }
+
+        .nav-blur {
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(20px);
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .check-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            padding: 0.4rem 0;
+        }
+        .check-icon {
+            width: 20px;
+            height: 20px;
+            min-width: 20px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #f59e0b, #fbbf24);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.65rem;
+            margin-top: 2px;
+        }
+
+        /* ===== MINI CAROUSEL DENTRO DO CARD ===== */
+        .mini-carousel {
+            position: relative;
+            overflow: hidden;
+            height: 220px;
+            border-radius: 1rem 1rem 0 0;
+        }
+        .mini-track {
+            display: flex;
+            height: 100%;
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .mini-slide {
+            min-width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        .mini-slide::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 60%;
+            background: linear-gradient(to top, rgba(0,0,0,0.5), transparent);
+        }
+
+        .mini-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.9);
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: #0f172a;
+            font-size: 0.8rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+        .mini-btn:hover { background: white; transform: translateY(-50%) scale(1.1); }
+        .mini-btn.prev { left: 0.5rem; }
+        .mini-btn.next { right: 0.5rem; }
+
+        .mini-dots {
+            position: absolute;
+            bottom: 0.75rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 0.4rem;
+            z-index: 10;
+        }
+        .mini-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.1);
+        }
+        .mini-dot.active {
+            background: #f59e0b;
+            width: 20px;
+            border-radius: 4px;
+        }
+
+        .badge-tag {
+            position: absolute;
+            bottom: 0.75rem;
+            left: 0.75rem;
+            z-index: 10;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Video Background Hero */
+        .video-hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            padding-top: 4rem;
+        }
+        .video-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+        }
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(15,23,42,0.88) 0%, rgba(15,23,42,0.75) 50%, rgba(15,23,42,0.88) 100%);
+            z-index: 1;
+        }
+        .video-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 2rem;
+        }
+        @media (max-width: 768px) {
+            .cards-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-slate-800">
+
+    <!-- Navbar -->
+    <nav class="fixed top-0 left-0 right-0 z-50 nav-blur border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center gap-2">
+                    <div class="w-9 h-9 rounded-lg bg-gradient-to-br from-accent to-amber-600 flex items-center justify-center text-white font-bold text-sm">AM</div>
+                    <span class="text-white font-bold text-lg tracking-tight">Amilson Monção</span>
+                </div>
+                <div class="hidden md:flex items-center gap-6">
+                    <a href="#planta" class="text-slate-300 hover:text-white text-sm font-medium transition-colors">Planta Baixa</a>
+                    <a href="#projeto3d" class="text-slate-300 hover:text-white text-sm font-medium transition-colors">Projetos 3D</a>
+                    <a href="#beneficios" class="text-slate-300 hover:text-white text-sm font-medium transition-colors">Benefícios</a>
+                    <a href="https://wa.me/5591992267511?text=Olá%20Amilson!%20Gostaria%20de%20um%20orçamento." target="_blank" class="btn-whatsapp text-white px-5 py-2 rounded-full text-sm font-semibold flex items-center gap-2">
+                        <i class="fab fa-whatsapp"></i>Orçamento
+                    </a>
+                </div>
+                <button id="mobile-menu-btn" class="md:hidden text-white text-xl"><i class="fas fa-bars"></i></button>
             </div>
-        </section>
-        <section class="section swatch-white-black has-top" id="about">
-            <div class="decor-top">
-                <svg class="decor" height="100%" preserveaspectratio="none" version="1.1" viewbox="0 0 100 100" width="100%" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M0 100 L100 0 L100 100" stroke-width="0"></path>
-                </svg>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden border-t border-white/10">
+            <div class="px-4 py-3 space-y-2">
+                <a href="#planta" class="block text-slate-300 hover:text-white py-2 text-sm">Planta Baixa</a>
+                <a href="#projeto3d" class="block text-slate-300 hover:text-white py-2 text-sm">Projetos 3D</a>
+                <a href="#beneficios" class="block text-slate-300 hover:text-white py-2 text-sm">Benefícios</a>
+                <a href="https://wa.me/5591992267511?text=Olá%20Amilson!%20Gostaria%20de%20um%20orçamento." target="_blank" class="block btn-whatsapp text-white px-4 py-2 rounded-full text-sm font-semibold text-center mt-2">
+                    <i class="fab fa-whatsapp mr-2"></i>Orçamento pelo WhatsApp
+                </a>
             </div>
-            <div class="container">
-                <header class="section-header underline">
-                    <h1 class="headline super hairline">Sobre mim</h1>
-                </header>
-                <div class="row">
-					<section class="section swatch-white-black text-center">
-						<div class="container">
-							<div class="row"-->
-								<div class="col-md-8 col-md-offset-2">
-									<div class="box-round flat-shadow box-huge box-hex">
-										<div class="box-dummy"></div>
-										<figure class="box-inner ">
-											<img class="" src="{{ "/assets/images/design/people/ams.png"  | prepend: site.baseurl }}" alt="some image"/>
-										</figure>
-									</div>
-									<h1>Amilson Monção</h1>
-									<p class="lead">
-										Olá, nasci em Marabá/PA, moro em Tailândia/PA, sou Desenvolvedor web, mobile, profissional de imagens e animação 3d para arquitetura. Atualmente trabalho de forma independente. <br/>
-										Cursei Técnico de Informática no Instituto Federal do Pará (IFPA) na cidade de Abaetetuba/PA em 2012, por curiosidade, comecei a fazer minha primeira faculdade de Ciência Contábeis, a qual parei com oito meses depois, por não ser tão motivador. <br/>
-										Por que trabalho com web, mobile e 3D agora? Ah… porque são incríveis e muito fáceis de aprender, isso me deixa mais feliz com a escolha que fiz.
-									</p><br/><br/><br/><br/>
-								</div>
-							</div>
-						</div>
-					</section>
-					<section class="section swatch-white-black has-top">
-						<div class="decor-top">
-							<svg class="decor" height="60px" preserveaspectratio="none" style="height: 60px !important;" version="1.1" viewbox="0 0 100 100" width="60px" xmlns="http://www.w3.org/2000/svg">
-								<path d="M50 0 L50 100" stroke-width="1"></path>
-								<path d="M0 50 L100 50" stroke-width="1"></path>
-							</svg>
-						</div>
-					</section>
-                    <ul class="list-unstyled row box-list horizontal-icon-border">
-						<li class="col-md-3 text-center" data-os-animation="" data-os-animation-delay="">
-							<div class="box-round box-medium">
-								<div class="box-dummy"></div>
-								<a class="box-inner " href="">
-									<i class="fa fa-file" data-animation="bounce"></i>
-								</a>
-							</div>
-							<h3 class="text-center ">
-								<a href="">
-									Planta baixa
-								</a>
-							</h3>
-							<p class="text-center">Que é desenho de uma construção feito, em geral, a partir do corte horizontal à altura de 1,5m a partir da base. É um diagrama dos relacionamentos entre salas, espaços e outros aspectos físicos em um nível de uma estrutura.</p>
-						</li>
-						<li class="col-md-3 text-center" data-os-animation="" data-os-animation-delay="">
-							<div class="box-round box-medium">
-								<div class="box-dummy"></div>
-								<a class="box-inner " href="">
-									<i class="fa fa-home" data-animation="swing"></i>
-								</a>
-							</div>
-							<h3 class="text-center ">
-								<a href="">
-									Projetos em 3d
-								</a>
-							</h3>
-							<p class="text-center">Permitem ao cliente uma visão espacial e muito mais clara de como ficará seu projeto no término de sua construção físicamente pronta.</p>
-						</li>
-						<li class="col-md-3 text-center" data-os-animation="" data-os-animation-delay="">
-							<div class="box-round box-medium">
-								<div class="box-dummy"></div>
-								<a class="box-inner " href="">
-									<i class="fa fa-mobile" data-animation="shake"></i>
-								</a>
-							</div>
-							<h3 class="text-center ">
-								<a href="">
-									Desenvolvedor Mobile
-								</a>
-							</h3>
-							<p class="text-center">Atua resumidamente, pelo desenvolvimento de softwares e recursos para dispositivos móveis, que podem englobar desde sistemas extranet, intranet até aplicativos.</p>
-						</li>
-						<li class="col-md-3 text-center" data-os-animation="" data-os-animation-delay="">
-							<div class="box-round box-medium">
-								<div class="box-dummy"></div>
-								<a class="box-inner " href="">
-									<i class="fa fa-globe" data-animation="tada"></i>
-								</a>
-							</div>
-							<h3 class="text-center ">
-								<a href="">
-									Projetos Web
-								</a>
-							</h3>
-							<p class="text-center">Onde o foco do projeto é a criação de web sites e documentos disponíveis no ambiente da internet.</p>
-						</li>
-					</ul>
+        </div>
+    </nav>
+
+    <!-- Hero com Vídeo de Fundo -->
+    <section class="video-hero">
+        <video class="video-bg" autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1920">
+            <source src="https://res.cloudinary.com/dba3sl00i/video/upload/v1781028335/1080_q5sgks.mp4" type="video/mp4">
+            <source src="https://res.cloudinary.com/dba3sl00i/video/upload/v1781028305/720_fxvaxn.mp4" type="video/mp4">
+        </video>
+        <div class="video-overlay"></div>
+
+        <div class="video-content max-w-5xl mx-auto px-4 text-center text-white">
+		
+			<h1 class="text-4xl sm:text-5xl md:text-7xl font-extrabold tracking-tight mb-6 reveal visible" style="transition-delay: 0.1s">
+                Transforme sua <span class="gradient-text">ideia</span><br>em <span class="gradient-text">realidade visual</span>
+            </h1>
+
+            <!--h1 class="text-4xl sm:text-5xl md:text-7xl font-extrabold tracking-tight mb-6 reveal" style="transition-delay: 0.1s">
+                Transforme sua <span class="gradient-text">ideia</span><br>em <span class="gradient-text">realidade visual</span>
+            </h1-->
+
+            <p class="text-lg sm:text-xl text-slate-300 max-w-2xl mx-auto mb-10 reveal" style="transition-delay: 0.2s">
+                Especialista em <strong class="text-white">Plantas Baixas</strong>, <strong class="text-white">Projetos 3D</strong> e <strong class="text-white">Fachadas</strong> 
+                com precisão técnica e foto-realismo. Veja seu projeto antes de construir.
+            </p>
+
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 reveal" style="transition-delay: 0.3s">
+                <a href="https://wa.me/5591992267511?text=Olá%20Amilson!%20Gostaria%20de%20um%20orçamento%20para%20projeto%203D/planta%20baixa." target="_blank" class="btn-whatsapp text-white px-8 py-4 rounded-full text-lg font-bold flex items-center gap-3 shadow-lg">
+                    <i class="fab fa-whatsapp text-xl"></i>Solicitar Orçamento
+                </a>
+                <a href="#planta" class="px-8 py-4 rounded-full text-lg font-semibold border border-white/20 text-white hover:bg-white/5 transition-all flex items-center gap-2">
+                    <i class="fas fa-chevron-down"></i>Ver Serviços
+                </a>
+            </div>
+
+            <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-3xl mx-auto reveal" style="transition-delay: 0.4s">
+                <div class="glass rounded-2xl p-4 text-center">
+                    <div class="text-2xl font-bold text-amber-400">100%</div>
+                    <div class="text-xs text-slate-400 mt-1">Projetos Entregues</div>
+                </div>
+                <div class="glass rounded-2xl p-4 text-center">
+                    <div class="text-2xl font-bold text-amber-400">Plantas</div>
+                    <div class="text-xs text-slate-400 mt-1">Com desenho técnico</div>
+                </div>
+                <div class="glass rounded-2xl p-4 text-center">
+                    <div class="text-2xl font-bold text-amber-400">3D</div>
+                    <div class="text-xs text-slate-400 mt-1">Foto-realismo</div>
+                </div>
+                <div class="glass rounded-2xl p-4 text-center">
+                    <div class="text-2xl font-bold text-amber-400">Rápido</div>
+                    <div class="text-xs text-slate-400 mt-1">Prazo Ágil</div>
                 </div>
             </div>
-        </section>
-        <section class="section swatch-black-white has-top" id="pricing">
-            <div class="decor-top">
-                <svg class="decor" height="100%" preserveaspectratio="none" version="1.1" viewbox="0 0 100 100" width="100%" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M0 0 L100 100 L0 100" stroke-width="0"></path>
-                </svg>
-            </div>
-            <div class="container">
-				<header class="section-header text-center underline">
-					<h1 class="headline super hairline">Meus Trabalhos</h1>
-				</header>
-				<div class="row">
-					<div class="text-default os-animation" data-os-animation="fadeInUp" data-os-animation-delay=".0s">
-						<ul class="isotope-filters text-center">
-							<li class="active">
-								<a class="pseudo-border active" data-filter="*" href="#">Todos</a>
-							</li>
-							<li>
-								<a class="pseudo-border" data-filter=".filter-gallery" href="#">galeria</a>
-							</li>
-							<li>
-								<a class="pseudo-border" data-filter=".filter-image" href="#">imagem</a>
-							</li>
-							<li>
-								<a class="pseudo-border" data-filter=".filter-video" href="#">video</a>
-							</li>
-						</ul>
-						<div class="portfolio isotope no-transition portfolio-hex portfolio-shadows row">
-							<div class="portfolio-item infinite-item col-md-4 col-sm-4 filter-image">
-								<figure class="portfolio-figure">
-									<a href="">
-										<img width="600" height="518" src="{{ "/assets/images/design/5.jpg" | prepend: site.baseurl }}" class="img-responsive" alt="some image">
-									</a>
-									<figcaption>
-										<h4>
-											<a href="">
-												Aplicativo do Grupo Lider
-											</a>
-										</h4>
-										<p>Aplicativo para melhor interação com os clientes do Grupo Lider</p>
-										<a class="magnific-gallery more" data-links="{{ "/assets/images/design/app5.jpg" | prepend: site.baseurl }}" title="Projeto dos Espanhois" data-prev-text="Previous" data-next-text="Next">
-											<i class="fa fa-search-plus"></i>
-										</a>
-										<a class="link" href="">
-											<i class="fa fa-link"></i>
-										</a>
-									</figcaption>
-								</figure>
-							</div>
+        </div>
 
-							<div class="portfolio-item infinite-item col-md-4 col-sm-4 filter-image">
-								<figure class="portfolio-figure">
-									<a href="">
-										<img width="600" height="518" src="{{ "/assets/images/design/6.jpg" | prepend: site.baseurl }}" class="img-responsive" alt="some image">
-									</a>
-									<figcaption>
-										<h4>
-											<a href="">
-												Aplicativo farmacêutico
-											</a>
-										</h4>
-										<p>Aplicativo para proficionais na area de Nutrição, Medicina e Farmácia</p>
-										<a class="magnific-gallery more" data-links="{{ "/assets/images/design/app6.jpg" | prepend: site.baseurl }}" title="Projeto dos Espanhois" data-prev-text="Previous" data-next-text="Next">
-											<i class="fa fa-search-plus"></i>
-										</a>
-										<a class="link" href="">
-											<i class="fa fa-link"></i>
-										</a>
-									</figcaption>
-								</figure>
-							</div>
-							<div class="portfolio-item infinite-item col-md-4 col-sm-4 filter-image">
-								<figure class="portfolio-figure">
-									<a href="">
-										<img width="600" height="518" src="{{ "/assets/images/design/7.jpg" | prepend: site.baseurl }}" class="img-responsive" alt="some image">
-									</a>
-									<figcaption>
-										<h4>
-											<a href="">
-												Aplicativo Saldavi
-											</a>
-										</h4>
-										<p>Aplicativo para acompanhaento de paciente terem uma alimentação salvadável</p>
-										<a class="magnific-gallery more" data-links="{{ "/assets/images/design/app7.jpg" | prepend: site.baseurl }}" title="Projeto dos Espanhois" data-prev-text="Previous" data-next-text="Next">
-											<i class="fa fa-search-plus"></i>
-										</a>
-										<a class="link" href="">
-											<i class="fa fa-link"></i>
-										</a>
-									</figcaption>
-								</figure>
-							</div>
-							
-							<div class="portfolio-item infinite-item col-md-4 col-sm-4 filter-gallery filter-image">
-								<figure class="portfolio-figure">
-									<a href="">
-										<img width="600" height="518" src="{{ "/assets/images/design/ronny-ico.jpg" | prepend: site.baseurl }}" class="img-responsive" alt="some image">
-									</a>
-									<figcaption>
-										<h4>
-											<a href="">
-												Projeto Ronny
-											</a>
-										</h4>
-										<p>Este projeto foi devolvido para o...</p>
-										<a class="magnific-gallery more" data-links="{{ "/assets/images/design/ronny.jpg ,assets/images/design/ronny1.jpg ,assets/images/design/ronny2.jpg" | prepend: site.baseurl }}" data-prev-text="Previous" data-next-text="Next">
-											<i class="fa fa-search-plus"></i>
-										</a>
-										<a class="link" href="">
-											<i class="fa fa-link"></i>
-										</a>
-									</figcaption>
-								</figure>
-							</div>
-							<div class="portfolio-item infinite-item col-md-4 col-sm-4 filter-video">
-								<figure class="portfolio-figure">
-									<a href="">
-										<img width="600" height="518" src="{{ "/assets/images/design/centro.jpg" | prepend: site.baseurl }}" class="img-responsive" alt="some image">
-									</a>
-									<figcaption>
-										<h4>
-											<a href="">
-												Animação do projeto do bairro centro
-											</a>
-										</h4>
-										<p>Projeto do Bairro centro próximo a Prefeitura.</p>
-										<a class="magnific-vimeo more" href="https://vimeo.com/230236998">
-											<i class="fa fa-search-plus"></i>
-										</a>
-										<a class="link" href="">
-											<i class="fa fa-link"></i>
-										</a>
-									</figcaption>
-								</figure>
-							</div>
-							<div class="portfolio-item infinite-item col-md-4 col-sm-4 filter-image">
-								<figure class="portfolio-figure">
-									<a href="">
-										<img width="600" height="518" src="{{ "/assets/images/design/espanhol-ico.jpg" | prepend: site.baseurl }}" class="img-responsive" alt="some image">
-									</a>
-									<figcaption>
-										<h4>
-											<a href="">
-												Projeto Espanhois
-											</a>
-										</h4>
-										<p>Projeto de casas populares para os Espanhois</p>
-										<a class="magnific-gallery more" data-links="{{ "/assets/images/design/espanhol.jpg ,assets/images/design/espanhol1.jpg ,assets/images/design/espanhol2.jpg" | prepend: site.baseurl }}" title="Projeto dos Espanhois" data-prev-text="Previous" data-next-text="Next">
-											<i class="fa fa-search-plus"></i>
-										</a>
-										<a class="link" href="">
-											<i class="fa fa-link"></i>
-										</a>
-									</figcaption>
-								</figure>
-							</div>
-							<div class="portfolio-item infinite-item col-md-4 col-sm-4 filter-image filter-gallery">
-								<figure class="portfolio-figure">
-									<a href="">
-										<img width="600" height="518" src="{{ "/assets/images/design/dona-rubia-ico.jpg" | prepend: site.baseurl }}" class="img-responsive" alt="some image">
-									</a>
-									<figcaption>
-										<h4>
-											<a href="">
-												Projeto Dona Rúbia
-											</a>
-										</h4>
-										<p>Casa residencial da Dona Rúbia</p>
-										<a class="magnific-gallery more" data-links="{{ "/assets/images/design/dona-rubia.jpg ,assets/images/design/dona-rubia1.jpg ,assets/images/design/dona-rubia2.jpg" | prepend: site.baseurl }}" title="Quisque porta" data-prev-text="Previous" data-next-text="Next">
-											<i class="fa fa-search-plus"></i>
-										</a>
-										<a class="link" href="">
-											<i class="fa fa-link"></i>
-										</a>
-									</figcaption>
-								</figure>
-							</div>
-							<div class="portfolio-item infinite-item col-md-4 col-sm-4 filter-video">
-								<figure class="portfolio-figure">
-									<a href="">
-										<img width="600" height="518" src="{{ "/assets/images/design/fabrica.jpg" | prepend: site.baseurl }}" class="img-responsive" alt="some image">
-									</a>
-									<figcaption>
-										<h4>
-											<a href="">
-												Fábrica de Ração
-											</a>
-										</h4>
-										<p>Projeto da Fábrica de Ração do meu amigo Gaúcho</p>
-										<a class="magnific-vimeo more" href="https://www.youtube.com/watch?v=oeGPpfmuEVs">
-											<i class="fa fa-search-plus"></i>
-										</a>
-										<a class="link" href="">
-											<i class="fa fa-link"></i>
-										</a>
-									</figcaption>
-								</figure>
-							</div>
-							<div class="portfolio-item infinite-item col-md-4 col-sm-4 filter-image filter-gallery">
-								<figure class="portfolio-figure">
-									<a href="">
-										<img width="600" height="518" src="{{ "/assets/images/design/posto.jpg" | prepend: site.baseurl }}" class="img-responsive" alt="some image">
-									</a>
-									<figcaption>
-										<h4>
-											<a href="">
-												Unidade de saúde Palmares
-											</a>
-										</h4>
-										<p>Projeto desenvolvido para a Prefeitura Municipal de Tailândia.</p>
-										<a class="magnific-gallery more" data-links="{{ "/assets/images/design/posto1.jpg ,assets/images/design/posto2.jpg ,assets/images/design/posto3.jpg ,assets/images/design/posto4.jpg ,assets/images/design/posto5.jpg" | prepend: site.baseurl }}" title="Projeto Unidade de sa?de Palmares" data-prev-text="Previous" data-next-text="Next">
-											<i class="fa fa-search-plus"></i>
-										</a>
-										<a class="link" href="">
-											<i class="fa fa-link"></i>
-										</a>
-									</figcaption>
-								</figure>
-							</div>
-						</div>
-						<div class="text-center">
-							<a class="btn btn-primary btn-lg btn-icon-right pull-center" href="">
-							Veja Mais
-							<div class="hex-alt hex-alt-big">
-								<i class="fa fa-rocket" data-animation="tada"></i>
-							</div>
-							</a>
-						</div>
-					</div>
-				</div>
-			</div>
-        </section>
-        <section class="section swatch-white-black has-top" id="skills">
-            <div class="decor-top">
-                <svg class="decor" height="100%" preserveaspectratio="none" version="1.1" viewbox="0 0 100 100" width="100%" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M0 100 L100 0 L100 100" stroke-width="0"></path>
-                </svg>
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce text-slate-500 z-10">
+            <i class="fas fa-chevron-down text-xl"></i>
+        </div>
+    </section>
+
+    <!-- ==================== PLANTA BAIXA - CARDS SEPARADOS COM CARROSSEL INTERNO ==================== -->
+    <section id="planta" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <span class="inline-block px-4 py-1 rounded-full bg-amber-100 text-amber-700 text-sm font-semibold mb-4">SERVIÇO</span>
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 mb-4">Planta Baixa</h2>
+                <p class="text-lg text-slate-500 max-w-2xl mx-auto">Desenho técnico profissional da sua construção com precisão e detalhamento completo</p>
             </div>
-            <div class="container">
-                <header class="section-header underline">
-                    <h1 class="headline super hairline">Habilidades</h1>
-                </header>
-                <div class="row">
-                    <div class="col-md-3  text-center">
-                        <div class="chart easyPieChart" data-track-color="#e2d9d8" data-bar-color="#555" data-line-width="20" data-percent="92" data-size="200">
-                            <span>92</span>
-                            <i class="fa fa-html5"></i>
+
+            <div class="cards-grid reveal">
+
+                <!-- ===== CARD 1: Planta Baixa Residencial ===== -->
+                <div class="bg-white rounded-3xl overflow-hidden shadow-xl card-hover border border-slate-100">
+                    <!-- Mini Carousel de Imagens -->
+                    <div class="mini-carousel" id="carousel-planta-res">
+                        <div class="mini-track" id="track-planta-res">
+                            <div class="mini-slide" style="background-image: url('https://kimi-web-img.moonshot.cn/img/www.tudoconstrucao.com/a771f855d1d5ed0a93844ad8f7834b174a7971cc.jpg');"></div>
+                            <div class="mini-slide" style="background-image: url('https://kimi-web-img.moonshot.cn/img/system.soprojetos.com.br/a61380b79f74a3fe376b634cab13d9e793d49833.jpg');"></div>
+                            <div class="mini-slide" style="background-image: url('https://kimi-web-img.moonshot.cn/img/s2.glbimg.com/28b9907a463f32f0047b973050a27d408b16852f.png');"></div>
                         </div>
-                        <h3 class="margin-top">
-								HTML, CSS, PHP e Dart
-						</h3>
-                        <p>
-                            Linguagens de programação esseciais para desenvolvimento web, onde o HTML é a linguagen básica para desenvolver websites e é a base da internet, CSS é responsável pelo estilo ou aparência das páginas e PHP é uma linguagem que permite criar sites WEB dinâmicos, possibilitando uma interação com o usuário através de formulários, parâmetros da URL e banco de dados.
-                        </p>
+                        <span class="badge-tag bg-amber-500">Residencial</span>
+                        <button class="mini-btn prev" onclick="moveMiniCarousel('planta-res', -1)"><i class="fas fa-chevron-left"></i></button>
+                        <button class="mini-btn next" onclick="moveMiniCarousel('planta-res', 1)"><i class="fas fa-chevron-right"></i></button>
+                        <div class="mini-dots" id="dots-planta-res">
+                            <div class="mini-dot active" onclick="goToMiniSlide('planta-res', 0)"></div>
+                            <div class="mini-dot" onclick="goToMiniSlide('planta-res', 1)"></div>
+                            <div class="mini-dot" onclick="goToMiniSlide('planta-res', 2)"></div>
+                        </div>
                     </div>
-                    <div class="col-md-3  text-center">
-                        <div class="chart easyPieChart" data-track-color="#e2d9d8" data-bar-color="#555" data-line-width="20" data-percent="70" data-size="200">
-                            <span>70</span>
-                            <i class="fa fa-code"></i>
+
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-slate-900 mb-2">Planta Baixa Residencial</h3>
+                        <p class="text-slate-500 text-sm mb-4 leading-relaxed">Diagrama completo dos relacionamentos entre salas, espaços e aspectos físicos da sua construção.</p>
+                        <div class="space-y-1 mb-6">
+                            <div class="check-item"><div class="check-icon"><i class="fas fa-check"></i></div><span class="text-slate-600 text-sm">Corte horizontal à 1,5m de altura</span></div>
+                            <div class="check-item"><div class="check-icon"><i class="fas fa-check"></i></div><span class="text-slate-600 text-sm">Distribuição de ambientes otimizada</span></div>
+                            <div class="check-item"><div class="check-icon"><i class="fas fa-check"></i></div><span class="text-slate-600 text-sm">Medidas e cotas precisas</span></div>
+                            <div class="check-item"><div class="check-icon"><i class="fas fa-check"></i></div><span class="text-slate-600 text-sm">Compatível com aprovação em prefeitura</span></div>
                         </div>
-                        <h3 class="margin-top">
-								Python e Django
-						</h3>
-                        <p>
-                            Python é uma linguagem de programação de alto nível, interpretada, imperativa, orientada a objetos, funcional, de tipagem dinâmica e forte, enquanto Django é um framework para desenvolvimento rápido para web, escrito em Python.
-                        </p>
-                    </div>
-                    <div class="col-md-3  text-center">
-                        <div class="chart easyPieChart" data-track-color="#e2d9d8" data-bar-color="#555" data-line-width="20" data-percent="85" data-size="200">
-                            <span>85</span>
-                            <i class="fa fa-picture-o"></i>
-                        </div>
-                        <h3 class="margin-top">
-								Imagens 3D
-						</h3>
-                        <p>
-							É uma imagem que simula realismo, obtida através de renderização de objetos 3D, fazendo a conversão de um 3D para uma representação em 2D, seja para obter uma imagem estática, seja para obter imagens foto-realísticas, definidas como (imagem 3D).
-						</p>
-                    </div>
-                    <div class="col-md-3  text-center">
-                        <div class="chart easyPieChart" data-track-color="#e2d9d8" data-bar-color="#555" data-line-width="20" data-percent="70" data-size="200">
-                            <span>70</span>
-                            <i class="fa fa-mobile"></i>
-                        </div>
-                        <h3 class="margin-top">
-								Aplicativos Mobile
-						</h3>
-                        <p>
-							 Mobile App uma abreviação da palavra aplicativo ou programa de software. Nos smartphones, apps são os programas que podem ser instalados em um celular para inúmeras finalidades, como jogos, previsão do tempo, tratamento de fotos, redes sociais, etc.
-						</p>
+                        <a href="https://wa.me/5591992267511?text=Olá!%20Quero%20fazer%20uma%20planta%20baixa%20residencial." target="_blank" class="btn-whatsapp w-full text-white py-3 rounded-xl font-bold text-center flex items-center justify-center gap-2 shadow-lg text-sm">
+                            <i class="fab fa-whatsapp"></i>Pedir Orçamento
+                        </a>
                     </div>
                 </div>
+
+                <!-- ===== CARD 2: Planta Baixa Comercial ===== -->
+                <div class="bg-white rounded-3xl overflow-hidden shadow-xl card-hover border border-slate-100">
+                    <!-- Mini Carousel de Imagens -->
+                    <div class="mini-carousel" id="carousel-planta-com">
+                        <div class="mini-track" id="track-planta-com">
+                            <div class="mini-slide" style="background-image: url('https://kimi-web-img.moonshot.cn/img/imgv2-2-f.scribdassets.com/c1ab2be93a7ef5d81ce08d2b254ceb820db72b63');"></div>
+                            <div class="mini-slide" style="background-image: url('https://kimi-web-img.moonshot.cn/img/img.pikbest.com/551bd478eeb9189882be0aa8a4c1fea0676df279.jpg!w700wp');"></div>
+                            <div class="mini-slide" style="background-image: url('https://kimi-web-img.moonshot.cn/img/aquiprojetos.com/8c3a392f81a64631ffb45db9e3298059e210757f.jpg');"></div>
+                        </div>
+                        <span class="badge-tag bg-indigo-500">Comercial</span>
+                        <button class="mini-btn prev" onclick="moveMiniCarousel('planta-com', -1)"><i class="fas fa-chevron-left"></i></button>
+                        <button class="mini-btn next" onclick="moveMiniCarousel('planta-com', 1)"><i class="fas fa-chevron-right"></i></button>
+                        <div class="mini-dots" id="dots-planta-com">
+                            <div class="mini-dot active" onclick="goToMiniSlide('planta-com', 0)"></div>
+                            <div class="mini-dot" onclick="goToMiniSlide('planta-com', 1)"></div>
+                            <div class="mini-dot" onclick="goToMiniSlide('planta-com', 2)"></div>
+                        </div>
+                    </div>
+
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-slate-900 mb-2">Planta Baixa Comercial</h3>
+                        <p class="text-slate-500 text-sm mb-4 leading-relaxed">Projetos para lojas, escritórios e espaços comerciais com foco em fluxo de pessoas.</p>
+                        <div class="space-y-1 mb-6">
+                            <div class="check-item"><div class="check-icon"><i class="fas fa-check"></i></div><span class="text-slate-600 text-sm">Layout funcional para negócios</span></div>
+                            <div class="check-item"><div class="check-icon"><i class="fas fa-check"></i></div><span class="text-slate-600 text-sm">Otimização de espaços</span></div>
+                            <div class="check-item"><div class="check-icon"><i class="fas fa-check"></i></div><span class="text-slate-600 text-sm">Fluxo de circulação</span></div>
+                            <div class="check-item"><div class="check-icon"><i class="fas fa-check"></i></div><span class="text-slate-600 text-sm">Acessibilidade e normas técnicas</span></div>
+                        </div>
+                        <a href="https://wa.me/5591992267511?text=Olá!%20Quero%20fazer%20uma%20planta%20baixa%20comercial." target="_blank" class="btn-whatsapp w-full text-white py-3 rounded-xl font-bold text-center flex items-center justify-center gap-2 shadow-lg text-sm">
+                            <i class="fab fa-whatsapp"></i>Pedir Orçamento
+                        </a>
+                    </div>
+                </div>
+
             </div>
-        </section>
+        </div>
+    </section>
+
+    <!-- ==================== PROJETOS 3D - CARDS SEPARADOS COM CARROSSEL INTERNO ==================== -->
+    <section id="projeto3d" class="py-20 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <span class="inline-block px-4 py-1 rounded-full bg-emerald-100 text-emerald-700 text-sm font-semibold mb-4">VISUALIZAÇÃO</span>
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 mb-4">Projetos em 3D</h2>
+                <p class="text-lg text-slate-500 max-w-2xl mx-auto">Visualização espacial realista do seu projeto finalizado com foto-realismo</p>
+            </div>
+
+            <div class="cards-grid reveal">
+
+                <!-- ===== CARD 3: Renderização Interna ===== -->
+                <div class="bg-white rounded-3xl overflow-hidden shadow-xl card-hover border border-slate-100">
+                    <!-- Mini Carousel de Imagens -->
+                    <div class="mini-carousel" id="carousel-3d-interno">
+                        <div class="mini-track" id="track-3d-interno">
+                            <div class="mini-slide" style="background-image: url('https://kimi-web-img.moonshot.cn/img/preview.free3d.com/103ea6ca481f4baf37f9f7381e3da9e388665c75.jpg');"></div>
+                            <div class="mini-slide" style="background-image: url('https://kimi-web-img.moonshot.cn/img/img.magnific.com/0a662e22aa71d7d2e895d72d7eb93cc21d0a6478.jpg');"></div>
+                            <div class="mini-slide" style="background-image: url('https://kimi-web-img.moonshot.cn/img/img.magnific.com/8515f1eca9edc40e2151bb2c571da4a91f7af54a.jpg');"></div>
+                        </div>
+                        <span class="badge-tag bg-teal-500">Interno</span>
+                        <button class="mini-btn prev" onclick="moveMiniCarousel('3d-interno', -1)"><i class="fas fa-chevron-left"></i></button>
+                        <button class="mini-btn next" onclick="moveMiniCarousel('3d-interno', 1)"><i class="fas fa-chevron-right"></i></button>
+                        <div class="mini-dots" id="dots-3d-interno">
+                            <div class="mini-dot active" onclick="goToMiniSlide('3d-interno', 0)"></div>
+                            <div class="mini-dot" onclick="goToMiniSlide('3d-interno', 1)"></div>
+                            <div class="mini-dot" onclick="goToMiniSlide('3d-interno', 2)"></div>
+                        </div>
+                    </div>
+
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-slate-900 mb-2">Renderização Interna</h3>
+                        <p class="text-slate-500 text-sm mb-4 leading-relaxed">Imagens foto-realistas dos ambientes internos para visualizar acabamentos e decoração.</p>
+                        <div class="space-y-1 mb-6">
+                            <div class="check-item"><div class="check-icon"><i class="fas fa-check"></i></div><span class="text-slate-600 text-sm">Iluminação realista</span></div>
+                            <div class="check-item"><div class="check-icon"><i class="fas fa-check"></i></div><span class="text-slate-600 text-sm">Texturas de acabamento</span></div>
+                            <div class="check-item"><div class="check-icon"><i class="fas fa-check"></i></div><span class="text-slate-600 text-sm">Mobiliário e decoração</span></div>
+                            <div class="check-item"><div class="check-icon"><i class="fas fa-check"></i></div><span class="text-slate-600 text-sm">Múltiplos ângulos</span></div>
+                        </div>
+                        <a href="https://wa.me/5591992267511?text=Olá!%20Quero%20renderização%203D%20interna." target="_blank" class="btn-whatsapp w-full text-white py-3 rounded-xl font-bold text-center flex items-center justify-center gap-2 shadow-lg text-sm">
+                            <i class="fab fa-whatsapp"></i>Pedir Orçamento
+                        </a>
+                    </div>
+                </div>
+
+                <!-- ===== CARD 4: Fachada 3D ===== -->
+                <div class="bg-white rounded-3xl overflow-hidden shadow-xl card-hover border border-slate-100">
+                    <!-- Mini Carousel de Imagens -->
+                    <div class="mini-carousel" id="carousel-3d-fachada">
+                        <div class="mini-track" id="track-3d-fachada">
+                            <div class="mini-slide" style="background-image: url('https://kimi-web-img.moonshot.cn/img/images.homify.com/c7d8f94879a08ad4ae7eeba9624853fb6c0a79e7.jpg');"></div>
+                            <div class="mini-slide" style="background-image: url('https://kimi-web-img.moonshot.cn/img/img.freepik.com/c00bb3db8a5786b7e3952439af5ee4ec1bd671af.jpg');"></div>
+                            <div class="mini-slide" style="background-image: url('https://kimi-web-img.moonshot.cn/img/fiverr-res.cloudinary.com/2b06278f1662c1d00763f97b851c9f09d83831f7.png');"></div>
+                        </div>
+                        <span class="badge-tag bg-orange-500">Fachada</span>
+                        <button class="mini-btn prev" onclick="moveMiniCarousel('3d-fachada', -1)"><i class="fas fa-chevron-left"></i></button>
+                        <button class="mini-btn next" onclick="moveMiniCarousel('3d-fachada', 1)"><i class="fas fa-chevron-right"></i></button>
+                        <div class="mini-dots" id="dots-3d-fachada">
+                            <div class="mini-dot active" onclick="goToMiniSlide('3d-fachada', 0)"></div>
+                            <div class="mini-dot" onclick="goToMiniSlide('3d-fachada', 1)"></div>
+                            <div class="mini-dot" onclick="goToMiniSlide('3d-fachada', 2)"></div>
+                        </div>
+                    </div>
+
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-slate-900 mb-2">Fachada 3D</h3>
+                        <p class="text-slate-500 text-sm mb-4 leading-relaxed">Visualização completa da fachada com materiais, cores e iluminação natural.</p>
+                        <div class="space-y-1 mb-6">
+                            <div class="check-item"><div class="check-icon"><i class="fas fa-check"></i></div><span class="text-slate-600 text-sm">Revestimentos e texturas reais</span></div>
+                            <div class="check-item"><div class="check-icon"><i class="fas fa-check"></i></div><span class="text-slate-600 text-sm">Iluminação dia/noite</span></div>
+                            <div class="check-item"><div class="check-icon"><i class="fas fa-check"></i></div><span class="text-slate-600 text-sm">Paisagismo integrado</span></div>
+                            <div class="check-item"><div class="check-icon"><i class="fas fa-check"></i></div><span class="text-slate-600 text-sm">Vista de múltiplos ângulos</span></div>
+                        </div>
+                        <a href="https://wa.me/5591992267511?text=Olá!%20Quero%20projeto%203D%20de%20fachada." target="_blank" class="btn-whatsapp w-full text-white py-3 rounded-xl font-bold text-center flex items-center justify-center gap-2 shadow-lg text-sm">
+                            <i class="fab fa-whatsapp"></i>Pedir Orçamento
+                        </a>
+                    </div>
+                </div>
+
+                <!-- ===== CARD 5: Animação 3D / Tour Virtual ===== -->
+                <div class="bg-white rounded-3xl overflow-hidden shadow-xl card-hover border border-slate-100">
+                    <!-- Mini Carousel de Imagens -->
+                    <div class="mini-carousel" id="carousel-3d-tour">
+                        <div class="mini-track" id="track-3d-tour">
+                            <div class="mini-slide" style="background-image: url('https://kimi-web-img.moonshot.cn/img/dhfczbzvtn6lt.cloudfront.net/53d52c148704c685510d880ac352d7c111bfb593.jpg');"></div>
+                            <div class="mini-slide" style="background-image: url('https://kimi-web-img.moonshot.cn/img/cdna.artstation.com/7705205a26ca6541ff11d30304b265292e79a30b.jpg');"></div>
+                            <div class="mini-slide" style="background-image: url('https://kimi-web-img.moonshot.cn/img/images.homify.com/063216d68241a42fa59872819ce50a436dbc620d.jpg');"></div>
+                        </div>
+                        <span class="badge-tag bg-blue-500">Virtual</span>
+                        <button class="mini-btn prev" onclick="moveMiniCarousel('3d-tour', -1)"><i class="fas fa-chevron-left"></i></button>
+                        <button class="mini-btn next" onclick="moveMiniCarousel('3d-tour', 1)"><i class="fas fa-chevron-right"></i></button>
+                        <div class="mini-dots" id="dots-3d-tour">
+                            <div class="mini-dot active" onclick="goToMiniSlide('3d-tour', 0)"></div>
+                            <div class="mini-dot" onclick="goToMiniSlide('3d-tour', 1)"></div>
+                            <div class="mini-dot" onclick="goToMiniSlide('3d-tour', 2)"></div>
+                        </div>
+                    </div>
+
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-slate-900 mb-2">Animação 3D / Tour Virtual</h3>
+                        <p class="text-slate-500 text-sm mb-4 leading-relaxed">Walkthrough virtual pelo seu projeto. Experiência imersiva de navegação pelos ambientes.</p>
+                        <div class="space-y-1 mb-6">
+                            <div class="check-item"><div class="check-icon"><i class="fas fa-check"></i></div><span class="text-slate-600 text-sm">Tour virtual navegável</span></div>
+                            <div class="check-item"><div class="check-icon"><i class="fas fa-check"></i></div><span class="text-slate-600 text-sm">Vídeo de apresentação</span></div>
+                            <div class="check-item"><div class="check-icon"><i class="fas fa-check"></i></div><span class="text-slate-600 text-sm">Perfeito para vendas</span></div>
+                            <div class="check-item"><div class="check-icon"><i class="fas fa-check"></i></div><span class="text-slate-600 text-sm">Alta resolução</span></div>
+                        </div>
+                        <a href="https://wa.me/5591992267511?text=Olá!%20Quero%20animação%203D%20ou%20tour%20virtual." target="_blank" class="btn-whatsapp w-full text-white py-3 rounded-xl font-bold text-center flex items-center justify-center gap-2 shadow-lg text-sm">
+                            <i class="fab fa-whatsapp"></i>Pedir Orçamento
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefícios -->
+    <section id="beneficios" class="py-20 bg-slate-900 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <span class="inline-block px-4 py-1 rounded-full bg-white/10 text-amber-400 text-sm font-semibold mb-4">POR QUE ESCOLHER</span>
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-4">Benefícios Exclusivos</h2>
+                <p class="text-lg text-slate-400 max-w-2xl mx-auto">Trabalho com dedicação total para entregar o melhor resultado para seu projeto</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="glass rounded-2xl p-8 text-center card-hover reveal">
+                    <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center text-white text-2xl"><i class="fas fa-bolt"></i></div>
+                    <h4 class="text-xl font-bold mb-2">Entrega Rápida</h4>
+                    <p class="text-slate-400 text-sm">Prazos ágeis sem perder a qualidade do projeto</p>
+                </div>
+                <div class="glass rounded-2xl p-8 text-center card-hover reveal" style="transition-delay: 0.1s">
+                    <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center text-white text-2xl"><i class="fas fa-tag"></i></div>
+                    <h4 class="text-xl font-bold mb-2">Preço Justo</h4>
+                    <p class="text-slate-400 text-sm">Orçamento transparente e acessível para seu bolso</p>
+                </div>
+                <div class="glass rounded-2xl p-8 text-center card-hover reveal" style="transition-delay: 0.2s">
+                    <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center text-white text-2xl"><i class="fas fa-bullseye"></i></div>
+                    <h4 class="text-xl font-bold mb-2">Alta Precisão</h4>
+                    <p class="text-slate-400 text-sm">Projetos técnicos com medidas exatas e detalhadas</p>
+                </div>
+                <div class="glass rounded-2xl p-8 text-center card-hover reveal" style="transition-delay: 0.3s">
+                    <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-whatsapp to-whatsapp-dark flex items-center justify-center text-white text-2xl"><i class="fab fa-whatsapp"></i></div>
+                    <h4 class="text-xl font-bold mb-2">Atendimento Direto</h4>
+                    <p class="text-slate-400 text-sm">Fale direto comigo pelo WhatsApp, sem burocracia</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Final -->
+    <section class="py-20 bg-gradient-to-br from-slate-50 to-slate-100">
+        <div class="max-w-4xl mx-auto px-4 text-center reveal">
+            <div class="w-20 h-20 mx-auto mb-6 rounded-full bg-gradient-to-br from-whatsapp to-whatsapp-dark flex items-center justify-center text-white text-3xl shadow-lg"><i class="fab fa-whatsapp"></i></div>
+            <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 mb-4">Pronto para Visualizar Seu Projeto?</h2>
+            <p class="text-lg text-slate-500 mb-8 max-w-2xl mx-auto">Entre em contato agora pelo WhatsApp e receba um orçamento personalizado para sua planta baixa ou projeto 3D.</p>
+
+            <a href="https://wa.me/5591992267511?text=Olá%20Amilson!%20Vi%20seu%20site%20e%20quero%20um%20orçamento%20para%20meu%20projeto." target="_blank" class="btn-whatsapp inline-flex items-center gap-3 text-white px-10 py-5 rounded-full text-xl font-bold shadow-xl">
+                <i class="fab fa-whatsapp text-2xl"></i>Chamar no WhatsApp
+            </a>
+
+            <div class="mt-6"><span class="text-2xl font-extrabold text-slate-900 tracking-wide">(91) 99226-7511</span></div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 border-t border-white/10 py-12">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <div class="flex items-center justify-center gap-2 mb-4">
+                <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-accent to-amber-600 flex items-center justify-center text-white font-bold text-xs">AM</div>
+                <span class="text-white font-bold text-lg">Amilson Monção</span>
+            </div>
+            <p class="text-slate-400 text-sm mb-2">Projetos 3D, Plantas Baixas e Fachadas</p>
+            <a href="https://wa.me/5591992267511" target="_blank" class="text-amber-400 hover:text-amber-300 font-semibold transition-colors"><i class="fab fa-whatsapp mr-2"></i>(91) 99226-7511</a>
+            <div class="mt-8 pt-8 border-t border-white/10 text-slate-600 text-xs">© 2026 Amilson Monção. Todos os direitos reservados.</div>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp -->
+    <a href="https://wa.me/5591992267511?text=Olá%20Amilson!%20Quero%20um%20orçamento." target="_blank" class="fixed bottom-6 right-6 z-50 w-16 h-16 rounded-full bg-gradient-to-br from-whatsapp to-whatsapp-dark text-white flex items-center justify-center text-2xl shadow-2xl float-wa hover:scale-110 transition-transform" title="Fale pelo WhatsApp"><i class="fab fa-whatsapp"></i></a>
+
+    <script>
+        // ===== MINI CAROUSELS INDEPENDENTES =====
+        const miniCarousels = {};
+
+        // Inicializar carousels
+        ['planta-res', 'planta-com', '3d-interno', '3d-fachada', '3d-tour'].forEach(id => {
+            miniCarousels[id] = { current: 0, total: 3 };
+        });
+
+        function moveMiniCarousel(id, direction) {
+            const c = miniCarousels[id];
+            c.current = (c.current + direction + c.total) % c.total;
+            updateMiniCarousel(id);
+        }
+
+        function goToMiniSlide(id, index) {
+            miniCarousels[id].current = index;
+            updateMiniCarousel(id);
+        }
+
+        function updateMiniCarousel(id) {
+            const track = document.getElementById('track-' + id);
+            const dots = document.getElementById('dots-' + id);
+            const c = miniCarousels[id];
+
+            if (track) track.style.transform = `translateX(-${c.current * 100}%)`;
+            if (dots) {
+                Array.from(dots.children).forEach((dot, i) => {
+                    dot.classList.toggle('active', i === c.current);
+                });
+            }
+        }
+
+        // Auto-play independente para cada mini carousel
+        setInterval(() => moveMiniCarousel('planta-res', 1), 5000);
+        setInterval(() => moveMiniCarousel('planta-com', 1), 5500);
+        setInterval(() => moveMiniCarousel('3d-interno', 1), 6000);
+        setInterval(() => moveMiniCarousel('3d-fachada', 1), 6500);
+        setInterval(() => moveMiniCarousel('3d-tour', 1), 7000);
+
+        // Scroll reveal
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // Mobile menu
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+        mobileMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => mobileMenu.classList.add('hidden')));
+
+        // Navbar scroll
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            nav.classList.toggle('shadow-lg', window.pageYOffset > 100);
+        });
+    </script>
+</body>
+</html>
